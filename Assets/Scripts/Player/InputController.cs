@@ -28,17 +28,26 @@ public class InputController : MonoBehaviour {
   /// Control the player's movement with the axis input
   /// </summary>
   private void ControlPlayerMovement() {
+
+    // idle
+    if (!Input.anyKey) {
+      playerMovement.Idle();
+    }
+
     // moving
     if (Input.GetAxisRaw("Horizontal") != 0) {
-
       // running or walking
-      if (Input.GetButtonDown("Run")) {
+      if (Input.GetButton("Run")) {
         playerMovement.Run();
       } else {
         playerMovement.Walk();
       }
-    } else {
-      playerMovement.Idle();
     }
+
+    // jumping
+    if (Input.GetButtonDown("Jump")) {
+      playerMovement.Jump();
+    }
+
   }
 }

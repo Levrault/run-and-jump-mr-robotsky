@@ -13,13 +13,15 @@ public class PlayerMovement : MonoBehaviour {
 
   // player's params
   public float walkingSpeed = 4f;
-  public float runningSpeed = 9.0f;
+  public float runningSpeed = 7.0f;
+  public float jumpForce = 6.0f;
 
   // private
   private Vector3 velocity;
   private Vector2 directionalInput;
   private bool isFlippedRight = true;
   private float speed = 0.0f;
+
 
   void Awake() {
     rigidBody2D = (Rigidbody2D) GetComponent(typeof(Rigidbody2D));
@@ -32,22 +34,42 @@ public class PlayerMovement : MonoBehaviour {
     SetSpriteRendererDirection();
   }
 
+  /// <summary>
+  /// Set player to idle
+  /// </summary>
   public void Idle() {
     animator.SetBool("isIdle", true);
     animator.SetBool("isWalking", false);
     animator.SetBool("isRunning", false);
+    animator.Play("PlayerIdle");
   }
 
+  /// <summary>
+  /// Set player to walking
+  /// </summary>
   public void Walk() {
     speed = walkingSpeed;
     animator.SetBool("isIdle", false);
     animator.SetBool("isWalking", true);
+    animator.Play("PlayerWalk");
   }
 
+  /// <summary>
+  /// Set player to run (increase his speed)
+  /// </summary>
   public void Run() {
     speed = runningSpeed;
     animator.SetBool("isIdle", false);
     animator.SetBool("isRunning", true);
+    animator.Play("PlayerRun");
+  }
+
+  /// <summary>
+  /// Set the player to jump
+  /// </summary>
+  public void Jump() {
+    rigidBody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    animator.SetBool("isJumping", true);
   }
 
   /// <summary>
