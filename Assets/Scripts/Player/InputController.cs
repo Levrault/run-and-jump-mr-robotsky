@@ -46,8 +46,9 @@ public class InputController : MonoBehaviour {
 
     // jumping
     if (Input.GetButtonDown("Jump")) {
-      playerMovement.Jump();
+      if (playerMovement.IsGrounded()) {
+        playerMovement.Jump();
+      }
     }
-
   }
 }

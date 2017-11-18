@@ -15,12 +15,15 @@ public class PlayerMovement : MonoBehaviour {
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
   public float jumpForce = 6.0f;
+  public Transform groundCheck;
+  public LayerMask groundLayer;
 
   // private
   private Vector3 velocity;
   private Vector2 directionalInput;
   private bool isFlippedRight = true;
   private float speed = 0.0f;
+  private float playerSkin = 0.2f;
 
 
   void Awake() {
@@ -38,9 +41,8 @@ public class PlayerMovement : MonoBehaviour {
   /// Set player to idle
   /// </summary>
   public void Idle() {
+    ResetPlayerStateMachine();
     animator.SetBool("isIdle", true);
-    animator.SetBool("isWalking", false);
-    animator.SetBool("isRunning", false);
     animator.Play("PlayerIdle");
   }
 
@@ -49,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
   /// </summary>
   public void Walk() {
     speed = walkingSpeed;
-    animator.SetBool("isIdle", false);
+    ResetPlayerStateMachine();
     animator.SetBool("isWalking", true);
     animator.Play("PlayerWalk");
   }
@@ -59,9 +61,19 @@ public class PlayerMovement : MonoBehaviour {
   /// </summary>
   public void Run() {
     speed = runningSpeed;
-    animator.SetBool("isIdle", false);
+    ResetPlayerStateMachine();
     animator.SetBool("isRunning", true);
     animator.Play("PlayerRun");
+  }
+
+  /// <summary>
+  /// Reset all the player's state machie to false
+  /// </summary>
+  public void ResetPlayerStateMachine() {
+    animator.SetBool("isIdle", false);
+    animator.SetBool("isWalking", false);
+    animator.SetBool("isRunning", false);
+    animator.SetBool("isJumping", false);
   }
 
   /// <summary>
@@ -102,5 +114,13 @@ public class PlayerMovement : MonoBehaviour {
   /// <param name="Input">Input.</param>
   public void SetDirectionalInput(Vector2 Input) {
     directionalInput = Input;
+  }
+
+  /// <summary>
+  /// Does the player hit the ground ?
+  /// </summary>
+  /// <returns>bool</returns>
+  public bool IsGrounded() {
+    return Physics2D.OverlapCircle(groundCheck.position, playerSkin, groundLayer);
   }
 }
