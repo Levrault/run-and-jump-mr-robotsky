@@ -10,7 +10,7 @@ public class InputController : MonoBehaviour {
   }
 
   void Update() {
-    SetPlayerDirectionalInput(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    SetPlayerDirectionalInput(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     ControlPlayerMovement();
   }
 
@@ -20,19 +20,14 @@ public class InputController : MonoBehaviour {
   /// <returns>The player directional input.</returns>
   /// <param name="horizontal">Horizontal.</param>
   /// <param name="vertical">Vertical.</param>
-  private void SetPlayerDirectionalInput(float horizontal, float vertical) {
+  void SetPlayerDirectionalInput(float horizontal, float vertical) {
     playerMovement.SetDirectionalInput(new Vector2(horizontal, vertical));
   }
 
   /// <summary>
   /// Control the player's movement with the axis input
   /// </summary>
-  private void ControlPlayerMovement() {
-
-    // idle
-    if (!Input.anyKey) {
-      playerMovement.Idle();
-    }
+  void ControlPlayerMovement() {
 
     // moving
     if (Input.GetAxisRaw("Horizontal") != 0) {
@@ -44,11 +39,19 @@ public class InputController : MonoBehaviour {
       }
     }
 
-    // jumping
-    if (Input.GetButtonDown("Jump")) {
-      if (playerMovement.IsGrounded()) {
+    // actions players can only if the are grounded
+
+      // idle
+      if (!Input.anyKey) {
+        playerMovement.Idle();
+      }
+
+      // jumping
+      if (Input.GetButtonDown("Jump")) {
         playerMovement.Jump();
       }
-    }
+      if (Input.GetButtonUp("Jump")) {
+        playerMovement.JumpTakeOff();
+      }
   }
 }

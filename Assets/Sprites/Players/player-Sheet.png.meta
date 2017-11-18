@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: aab62fb4ce2194cd682434db1b539ed2
-timeCreated: 1510654759
+timeCreated: 1511019301
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -18,6 +18,8 @@ TextureImporter:
     21300022: player-Sheet_11
     21300024: player-Sheet_12
     21300026: player-Sheet_13
+    21300028: player-Sheet_14
+    21300030: player-Sheet_15
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -140,10 +142,10 @@ TextureImporter:
       name: player-Sheet_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 27
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +156,10 @@ TextureImporter:
       name: player-Sheet_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 32
         y: 0
-        width: 27
-        height: 30
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +170,10 @@ TextureImporter:
       name: player-Sheet_2
       rect:
         serializedVersion: 2
-        x: 68
+        x: 64
         y: 0
-        width: 27
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +184,10 @@ TextureImporter:
       name: player-Sheet_3
       rect:
         serializedVersion: 2
-        x: 100
+        x: 96
         y: 0
-        width: 26
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +198,10 @@ TextureImporter:
       name: player-Sheet_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 128
         y: 0
-        width: 25
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,10 +212,10 @@ TextureImporter:
       name: player-Sheet_5
       rect:
         serializedVersion: 2
-        x: 164
+        x: 160
         y: 0
-        width: 27
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +226,10 @@ TextureImporter:
       name: player-Sheet_6
       rect:
         serializedVersion: 2
-        x: 196
+        x: 192
         y: 0
-        width: 28
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,10 +240,10 @@ TextureImporter:
       name: player-Sheet_7
       rect:
         serializedVersion: 2
-        x: 228
+        x: 224
         y: 0
-        width: 27
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,10 +254,10 @@ TextureImporter:
       name: player-Sheet_8
       rect:
         serializedVersion: 2
-        x: 260
+        x: 256
         y: 0
-        width: 24
-        height: 31
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,9 +268,9 @@ TextureImporter:
       name: player-Sheet_9
       rect:
         serializedVersion: 2
-        x: 292
+        x: 288
         y: 0
-        width: 24
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -280,9 +282,9 @@ TextureImporter:
       name: player-Sheet_10
       rect:
         serializedVersion: 2
-        x: 324
+        x: 320
         y: 0
-        width: 24
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -294,9 +296,9 @@ TextureImporter:
       name: player-Sheet_11
       rect:
         serializedVersion: 2
-        x: 356
+        x: 352
         y: 0
-        width: 24
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -308,9 +310,9 @@ TextureImporter:
       name: player-Sheet_12
       rect:
         serializedVersion: 2
-        x: 388
+        x: 384
         y: 0
-        width: 24
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -322,10 +324,38 @@ TextureImporter:
       name: player-Sheet_13
       rect:
         serializedVersion: 2
-        x: 420
+        x: 416
         y: 0
-        width: 24
-        height: 31
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: player-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
