@@ -27,7 +27,7 @@ public class PlayerMovement : PhysicObject {
     spriteRenderer = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
   }
 
-  public override void Update() {
+  protected override void ComputeVelocity() {
     SetSpriteRendererDirection();
 
     if (IsGrounded() && !animator.GetBool("isIdle")) {
