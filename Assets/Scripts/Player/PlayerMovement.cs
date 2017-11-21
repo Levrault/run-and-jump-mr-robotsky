@@ -27,15 +27,11 @@ public class PlayerMovement : PhysicObject {
     spriteRenderer = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
   }
 
+  /// <summary>
+  /// Custom velocity for the player
+  /// </summary>
   protected override void ComputeVelocity() {
     SetSpriteRendererDirection();
-
-    if (IsGrounded() && !animator.GetBool("isIdle")) {
-      ResetPlayerStateMachine();
-    }
-
-    Debug.Log(speed);
-
     targetVelocity = new Vector2(directionalInput.x, Vector2.zero.y) * speed;
   }
 
@@ -91,11 +87,9 @@ public class PlayerMovement : PhysicObject {
   /// Set the player to jump
   /// </summary>
   public void Jump() {
-
-    ResetPlayerStateMachine();
-    animator.SetBool("isJumping", true);
-
     if (IsGrounded()) {
+      ResetPlayerStateMachine();
+      animator.SetBool("isJumping", true);
       velocity.y = jumpForce;
       animator.Play("PlayerJump");
     }

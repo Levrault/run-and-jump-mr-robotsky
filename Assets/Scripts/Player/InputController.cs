@@ -39,19 +39,16 @@ public class InputController : MonoBehaviour {
       }
     }
 
-    // actions players can only if the are grounded
+    // idle
+    if (!Input.anyKey) {
+      playerMovement.Idle();
+    }
 
-      // idle
-      if (!Input.anyKey) {
-        playerMovement.Idle();
-      }
-
-      // jumping
-      if (Input.GetButtonDown("Jump")) {
-        playerMovement.Jump();
-      }
-      if (Input.GetButtonUp("Jump")) {
-        playerMovement.JumpTakeOff();
-      }
+    // jumping
+    if (Input.GetButtonDown("Jump")) {
+      playerMovement.Jump();
+    } else if (Input.GetButtonUp("Jump")) {
+      playerMovement.JumpTakeOff();
+    }
   }
 }

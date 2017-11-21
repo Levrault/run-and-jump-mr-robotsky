@@ -1281,12 +1281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c230130e6e241fa963b408d168a102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityModifier: 1
+  gravityModifier: 2.5
   minGroundNormalY: 0.65
-  velocityXSmoothing: 0
   walkingSpeed: 2
   runningSpeed: 5
-  jumpForce: 7
+  jumpForce: 10
   groundCheck: {fileID: 1990655971}
   groundLayer:
     serializedVersion: 2

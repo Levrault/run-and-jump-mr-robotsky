@@ -14,8 +14,6 @@ public class PhysicObject : MonoBehaviour {
   // use to determine if the player is ground by comparing to all raycastHit2D normal
   public float minGroundNormalY = 0.65f;
 
-  public float velocityXSmoothing = 0f;
-
   // does the object is grounded
   protected bool isGrounded;
 
