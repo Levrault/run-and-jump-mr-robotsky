@@ -28,12 +28,12 @@ SpriteAtlas:
       enableTightPacking: 1
     packedHash:
       serializedVersion: 2
-      Hash: 0c7c7fc77675059be6c59437f2e442de
+      Hash: 0b03fc06e8c69a7ceb28a126bca2bc50
     variantMultiplier: 1
     bindAsDefault: 1
     finalFormat: 4
-    hashString: 0c7c7fc77675059be6c59437f2e442de
-    totalSpriteSurfaceArea: 43008
+    hashString: 0b03fc06e8c69a7ceb28a126bca2bc50
+    totalSpriteSurfaceArea: 46080
     packables:
     - {fileID: 2800000, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
     packedSpriteRenderDataKeys:
@@ -49,8 +49,11 @@ SpriteAtlas:
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300020
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300080
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300082
+    - 8ad7d4c63a70a460e8abfc48c5994679: 21300084
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300044
+    - 8ad7d4c63a70a460e8abfc48c5994679: 21300086
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300046
+    - 8ad7d4c63a70a460e8abfc48c5994679: 21300088
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300040
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300042
     - 8ad7d4c63a70a460e8abfc48c5994679: 21300070
@@ -93,8 +96,11 @@ SpriteAtlas:
   - {fileID: 21300020, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300080, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300082, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
+  - {fileID: 21300084, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300044, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
+  - {fileID: 21300086, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300046, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
+  - {fileID: 21300088, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300040, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300042, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
   - {fileID: 21300070, guid: 8ad7d4c63a70a460e8abfc48c5994679, type: 3}
@@ -136,8 +142,11 @@ SpriteAtlas:
   - floor-Sheet_10
   - floor-Sheet_40
   - floor-Sheet_41
+  - floor-Sheet_42
   - floor-Sheet_22
+  - floor-Sheet_43
   - floor-Sheet_23
+  - floor-Sheet_44
   - floor-Sheet_20
   - floor-Sheet_21
   - floor-Sheet_35
