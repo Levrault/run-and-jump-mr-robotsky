@@ -31,7 +31,15 @@ public class PlayerMovement : PhysicObject {
   /// Custom velocity for the player
   /// </summary>
   protected override void ComputeVelocity() {
+    // sprite direction
     SetSpriteRendererDirection();
+
+    // animation state
+    animator.SetFloat("moveX", speed);
+    animator.SetFloat("moveY", velocity.y);
+    animator.SetBool("isGrounded", isGrounded);
+
+    // velocity for the next frame
     targetVelocity = new Vector2(directionalInput.x, Vector2.zero.y) * speed;
   }
 
@@ -39,11 +47,7 @@ public class PlayerMovement : PhysicObject {
   /// Set player to idle
   /// </summary>
   public void Idle() {
-    if (IsGrounded()) {
-      speed = 0f;
-      animator.SetBool("isIdle", true);
-      animator.Play("PlayerIdle");
-    }
+    speed = 0f;
   }
 
   /// <summary>
@@ -51,12 +55,6 @@ public class PlayerMovement : PhysicObject {
   /// </summary>
   public void Walk() {
     speed = walkingSpeed;
-
-    animator.SetBool("isRunning", false);
-    animator.SetBool("isWalking", true);
-    if (IsGrounded()) {
-      animator.Play("PlayerWalk");
-    }
   }
 
   /// <summary>
@@ -64,23 +62,6 @@ public class PlayerMovement : PhysicObject {
   /// </summary>
   public void Run() {
     speed = runningSpeed;
-
-    animator.SetBool("isWalking", false);
-    animator.SetBool("isRunning", true);
-    if (IsGrounded()) {
-      animator.Play("PlayerRun");
-    }
-  }
-
-  /// <summary>
-  /// Set player to fall
-  /// </summary>
-  public void Fall() {
-    if (!animator.GetBool("isFalling")) {
-      ResetPlayerStateMachine();
-      animator.SetBool("isFalling", true);
-      animator.Play("PlayerFall");
-    }
   }
 
   /// <summary>
@@ -88,10 +69,7 @@ public class PlayerMovement : PhysicObject {
   /// </summary>
   public void Jump() {
     if (IsGrounded()) {
-      ResetPlayerStateMachine();
-      animator.SetBool("isJumping", true);
       velocity.y = jumpForce;
-      animator.Play("PlayerJump");
     }
   }
 
@@ -102,16 +80,6 @@ public class PlayerMovement : PhysicObject {
     if (velocity.y > 0) {
       velocity.y = velocity.y * 0.5f;
     }
-  }
-
-  /// <summary>
-  /// Reset all the player's state machie to false
-  /// </summary>
-  public void ResetPlayerStateMachine() {
-    animator.SetBool("isIdle", false);
-    animator.SetBool("isWalking", false);
-    animator.SetBool("isRunning", false);
-    animator.SetBool("isJumping", false);
   }
 
   /// <summary>

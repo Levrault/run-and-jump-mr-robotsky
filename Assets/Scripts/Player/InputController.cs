@@ -40,7 +40,7 @@ public class InputController : MonoBehaviour {
     }
 
     // idle
-    if (!Input.anyKey) {
+    if (!Input.anyKey && playerMovement.IsGrounded()) {
       playerMovement.Idle();
     }
 
