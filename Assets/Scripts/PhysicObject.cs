@@ -69,10 +69,10 @@ public class PhysicObject : MonoBehaviour {
   /// <summary>
   /// Calculate gravity/velocity to move our object
   /// </summary>
- void FixedUpdate() {
+  void FixedUpdate() {
 
     // use default gravity with our custom gravity with the time since the last frame
-    velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+    DefaultVelocityEquation();
 
     // add incoming value to velocity
     velocity.x = targetVelocity.x;
@@ -103,7 +103,14 @@ public class PhysicObject : MonoBehaviour {
   /// <summary>
   /// Empty function. Use in children to set input
   /// </summary>
-  protected virtual void ComputeVelocity() {}
+  protected virtual void ComputeVelocity() { }
+
+  /// <summary>
+  /// Reset velocity with the default operation
+  /// </summary>
+  protected void DefaultVelocityEquation() {
+    velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+  }
 
   /// <summary>
   /// Applying movement/collision to our object
