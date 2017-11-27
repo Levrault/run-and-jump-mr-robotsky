@@ -8,39 +8,63 @@ using UnityEngine;
 public class PlayerMovement : PhysicObject {
   // Player's component
   private Animator animator;
-  private SpriteRenderer spriteRenderer;
 
   // player's params
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
   public float jumpForce = 7.0f;
-  public Transform groundCheck;
-  public LayerMask groundLayer;
+  public Vector2 wallJumpLeap = new Vector2(18, 17);
+  public Transform wallJumpCheck;
+  public LayerMask wallJumpLayer;
 
   // private
   private Vector2 directionalInput;
-  private bool isFlippedRight = true;
+  private bool isFacingRight = true;
   private float speed = 0f;
+  private bool isWallJumping = false;
+  private bool isVelocityForWallJumping = false;
+  private bool isNeedToSwitchDirection = false;
+  private int wallJumpDirectionX;
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
-    spriteRenderer = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
+  }
+
+  void OnDrawGizmos() {
+    // IsCollidingWithWall()
+    Gizmos.color = Color.red;
+    Vector2 position = wallJumpCheck.position;
+    Gizmos.DrawWireSphere(new Vector3(position.x, position.y, 0), 0.2f);
+
   }
 
   /// <summary>
-  /// Custom velocity for the player
+  /// Compute velocity every frame
   /// </summary>
   protected override void ComputeVelocity() {
-    // sprite direction
-    SetSpriteRendererDirection();
 
     // animation state
     animator.SetFloat("moveX", speed);
     animator.SetFloat("moveY", velocity.y);
     animator.SetBool("isGrounded", isGrounded);
 
-    // velocity for the next frame
-    targetVelocity = new Vector2(directionalInput.x, Vector2.zero.y) * speed;
+    // default velocity
+    ComputeDefaultTargetVelocity();
+
+    // player direction
+    if (!isWallJumping) {
+      Flip();
+    }
+
+    // slide agains wall
+    if (!isGrounded) {
+      SlideWall();
+    }
+
+    // wall jumping velocity
+    if (isWallJumping) {
+      WallJump();
+    }
   }
 
   /// <summary>
@@ -58,7 +82,7 @@ public class PlayerMovement : PhysicObject {
   }
 
   /// <summary>
-  /// Set player to run (increase his speed)
+  /// Set player to run (by increasing speed)
   /// </summary>
   public void Run() {
     speed = runningSpeed;
@@ -68,8 +92,12 @@ public class PlayerMovement : PhysicObject {
   /// Set the player to jump
   /// </summary>
   public void Jump() {
-    if (IsGrounded()) {
+    if (isGrounded) {
       velocity.y = jumpForce;
+    } else if (IsAbleToWallJump()) {
+      isNeedToSwitchDirection = true;
+      isVelocityForWallJumping = true;
+      isWallJumping = true;
     }
   }
 
@@ -83,16 +111,70 @@ public class PlayerMovement : PhysicObject {
   }
 
   /// <summary>
-  /// Set spriteRenderer flipping direction when
-  /// directionInput change
+  /// Make the player do wall jumping
   /// </summary>
-  public void SetSpriteRendererDirection() {
-    if (directionalInput.x < 0 && isFlippedRight) {
-      spriteRenderer.flipX = true;
-      isFlippedRight = false;
-    } else if (!isFlippedRight && directionalInput.x > 0) {
-      spriteRenderer.flipX = false;
-      isFlippedRight = true;
+  public void WallJump() {
+
+    // wall jump direction (if facing right, should wall jump to the left)
+    float wallJumpLeapX = wallJumpDirectionX * wallJumpLeap.x;
+
+    // change player direction
+    if (isNeedToSwitchDirection) {
+      InverseScaleX();
+      isFacingRight = !isFacingRight;
+      isNeedToSwitchDirection = false;
+    }
+
+    // does velocity need to be changed to wallJumpLeapY value
+    if (velocity.y != wallJumpLeap.y && isVelocityForWallJumping) {
+      velocity.y = wallJumpLeap.y;
+      isVelocityForWallJumping = false;
+    } else {
+      DefaultVelocityEquation();
+    }
+
+    // new velocity for the next frame
+    targetVelocity = new Vector2(wallJumpLeapX, Vector2.zero.y);
+
+    if (isGrounded || IsCollidingWithWall()) {
+      isWallJumping = false;
+      wallJumpDirectionX = 0;
+    }
+  }
+
+  /// <summary>
+  /// Make the player slowly slide a wall if his velocity is below 0.01
+  /// </summary>
+  public void SlideWall() {
+    animator.SetBool("isSliding", IsAbleToWallJump());
+
+    if (animator.GetBool("isSliding")) {
+      wallJumpDirectionX = isFacingRight ? -1 : 1;
+      if (animator.GetFloat("moveY") < 0.01f) {
+        velocity.y = Time.deltaTime;
+      }
+    } 
+  }
+
+  /// <summary>
+  /// Does the player touch a wall to execute a wall jump ?
+  /// Does the player touch the ground and a wall (and isn't already walljumping)
+  /// </summary>
+  /// <returns>does the wall is touched</returns>
+  public bool IsAbleToWallJump() {
+    return !isGrounded && IsCollidingWithWall() && !isWallJumping;
+  }
+
+  /// <summary>
+  /// Flip player left/right. Based on horizontal input direction.
+  /// </summary>
+  public void Flip() {
+    if (directionalInput.x < 0 && isFacingRight) {
+      isFacingRight = false;
+      InverseScaleX();
+    } else if (!isFacingRight && directionalInput.x > 0) {
+      isFacingRight = true;
+      InverseScaleX();
     }
   }
 
@@ -113,4 +195,27 @@ public class PlayerMovement : PhysicObject {
     return isGrounded;
   }
 
+  /// <summary>
+  /// Inverse x axes of localScale
+  /// </summary>
+  private void InverseScaleX() {
+    Vector3 scale = transform.localScale;
+    scale.x *= -1;
+    transform.localScale = scale;
+  }
+
+  /// <summary>
+  /// Set default targetVelocity (Vector2 (directionalInput.x, Vector2.zero.y) * speed)
+  /// </summary>
+  private void ComputeDefaultTargetVelocity() {
+    targetVelocity = new Vector2(directionalInput.x, Vector2.zero.y) * speed;
+  }
+
+  /// <summary>
+  /// Does the player has collide with a wall ?
+  /// </summary>
+  /// <returns>bool</returns>
+  private bool IsCollidingWithWall() {
+    return Physics2D.OverlapCircle(wallJumpCheck.position, 0.2f, wallJumpLayer) ? true : false;
+  }
 }
