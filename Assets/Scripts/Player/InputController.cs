@@ -30,7 +30,7 @@ public class InputController : MonoBehaviour {
   void ControlPlayerMovement() {
 
     // moving
-    if (Input.GetAxisRaw("Horizontal") != 0) {
+    if (Input.GetAxis("Horizontal") != 0) {
       // running or walking
       if (Input.GetButton("Run")) {
         playerMovement.Run();
@@ -49,6 +49,15 @@ public class InputController : MonoBehaviour {
       playerMovement.Jump();
     } else if (Input.GetButtonUp("Jump")) {
       playerMovement.JumpTakeOff();
+    }
+
+    // faster sliding
+    if (playerMovement.IsAbleToWallJump()) {
+      if (Input.GetAxis("Vertical") < 0) {
+        playerMovement.IncreaseSlidingSpeed();
+      } else {
+        playerMovement.ResetSlidingSpeed();
+      }
     }
   }
 }

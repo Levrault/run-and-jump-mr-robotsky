@@ -12,8 +12,10 @@ public class PlayerMovement : PhysicObject {
   // player's params
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
+  public float slidingSpeed = 0.1f;
+  public float maxSlidingSpeed = 2f;
   public float jumpForce = 7.0f;
-  public Vector2 wallJumpLeap = new Vector2(18, 17);
+  public Vector2 wallJumpLeap = new Vector2(8, 12);
   public Transform wallJumpCheck;
   public LayerMask wallJumpLayer;
 
@@ -25,9 +27,11 @@ public class PlayerMovement : PhysicObject {
   private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
   private int wallJumpDirectionX;
+  private float defaultSlidingSpeed;
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
+    defaultSlidingSpeed = slidingSpeed;
   }
 
   void OnDrawGizmos() {
@@ -151,9 +155,25 @@ public class PlayerMovement : PhysicObject {
     if (animator.GetBool("isSliding")) {
       wallJumpDirectionX = isFacingRight ? -1 : 1;
       if (animator.GetFloat("moveY") < 0.01f) {
-        velocity.y = Time.deltaTime;
+        Debug.Log("slidingspeed " + slidingSpeed);
+        velocity.y = slidingSpeed * -1;
       }
     } 
+  }
+
+  /// <summary>
+  /// Increase player's sliding speed 
+  /// </summary>
+  /// <param name="newSpeed"></param>
+  public void IncreaseSlidingSpeed() {
+    slidingSpeed = maxSlidingSpeed;
+  }
+
+  /// <summary>
+  /// Reset default sliding speed
+  /// </summary>
+  public void ResetSlidingSpeed() {
+    slidingSpeed = defaultSlidingSpeed;
   }
 
   /// <summary>
