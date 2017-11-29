@@ -9,6 +9,8 @@ public class PlayerMovement : PhysicObject {
   // Player's component
   private Animator animator;
 
+  public PlayerSound playerSound;
+
   // player's params
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
@@ -31,6 +33,7 @@ public class PlayerMovement : PhysicObject {
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
+    playerSound = (PlayerSound) GetComponent(typeof(PlayerSound));
     defaultSlidingSpeed = slidingSpeed;
   }
 
@@ -96,7 +99,10 @@ public class PlayerMovement : PhysicObject {
   /// Set the player to jump
   /// </summary>
   public void Jump() {
+
     if (isGrounded) {
+      // sound effect
+      playerSound.PlayJumpAudioClip();
       velocity.y = jumpForce;
     } else if (IsAbleToWallJump()) {
       isNeedToSwitchDirection = true;
@@ -124,6 +130,10 @@ public class PlayerMovement : PhysicObject {
 
     // change player direction
     if (isNeedToSwitchDirection) {
+      // sound effect
+      playerSound.PlayJumpAudioClip();
+
+      // inverse direction
       InverseScaleX();
       isFacingRight = !isFacingRight;
       isNeedToSwitchDirection = false;
@@ -140,6 +150,7 @@ public class PlayerMovement : PhysicObject {
     // new velocity for the next frame
     targetVelocity = new Vector2(wallJumpLeapX, Vector2.zero.y);
 
+    // wall jumping is over
     if (isGrounded || IsCollidingWithWall()) {
       isWallJumping = false;
       wallJumpDirectionX = 0;

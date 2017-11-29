@@ -14,6 +14,35 @@ The game is developed with the following tools:
 
 
 
+
+## Resources (Music, sound effects, fonts)
+
+All musics are royalty free (source https://www.dl-sounds.com/)
+
+* Intro-screen
+* Arcade-funk
+* Defense-line
+
+
+
+
+Sounds effects are under creative commons license (source https://freesound.org)
+
+- Jump by [jeckkech](http://freesound.org/people/jeckkech/)
+- Jump landing (renamed landing) by [MentalSanityOff](https://opengameart.org/content/jump-landing-sound)
+- Game over arcade by [myfox14](http://freesound.org/people/myfox14/)
+- Menu select by [killkhan](http://freesound.org/people/killkhan/)
+- Level win by [Tuudurt](https://freesound.org/people/Tuudurt/sounds/258142/)
+
+
+
+
+Font is under SIL Open Font License 
+
+* PressStart2 by Cody "CodeMan38" Boisclair (cody@zone38.net)
+
+
+
 ## The one sheet sample (Game design document)
 
 **Run and jump Mr Robotsky (game title) concept overview**
