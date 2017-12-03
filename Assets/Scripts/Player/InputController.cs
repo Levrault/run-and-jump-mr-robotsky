@@ -37,10 +37,8 @@ public class InputController : MonoBehaviour {
       } else {
         playerMovement.Walk();
       }
-    }
-
-    // idle
-    if (!Input.anyKey && playerMovement.IsGrounded()) {
+    } else if (playerMovement.IsGrounded()) {
+      // idle
       playerMovement.Idle();
     }
 
