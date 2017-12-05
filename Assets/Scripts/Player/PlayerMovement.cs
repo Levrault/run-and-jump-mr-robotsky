@@ -23,6 +23,7 @@ public class PlayerMovement : PhysicObject {
 
   // private
   private Vector2 directionalInput;
+  private Vector2 rawDirectionalInput;
   private bool isFacingRight = true;
   private float speed = 0f;
   private bool isWallJumping = false;
@@ -30,6 +31,9 @@ public class PlayerMovement : PhysicObject {
   private bool isNeedToSwitchDirection = false;
   private int wallJumpDirectionX;
   private float defaultSlidingSpeed;
+  private const int unstickFrame = 20;
+  private int unstickFrameCounter;
+  private bool isStickToWall = false;
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
@@ -55,23 +59,31 @@ public class PlayerMovement : PhysicObject {
     animator.SetFloat("moveY", velocity.y);
     animator.SetBool("isGrounded", isGrounded);
 
-    // default velocity
-    ComputeDefaultTargetVelocity();
+    // stick to the wall delay
+    if (animator.GetBool("isSliding") && isStickToWall) {
+      UnstickFromWallTimer();
+    } else {
 
-    // player direction
-    if (!isWallJumping) {
-      Flip();
+      // default velocity
+      ComputeDefaultTargetVelocity();
+
+      // wall jumping velocity
+      if (isWallJumping) {
+        WallJump();
+      } else {
+        // player direction
+        Flip();
+      }
+
     }
 
     // slide agains wall
-    if (!isGrounded) {
+    if (IsAbleToWallJump()) {
       SlideWall();
+    } else {
+      animator.SetBool("isSliding", false);
     }
 
-    // wall jumping velocity
-    if (isWallJumping) {
-      WallJump();
-    }
   }
 
   /// <summary>
@@ -99,9 +111,7 @@ public class PlayerMovement : PhysicObject {
   /// Set the player to jump
   /// </summary>
   public void Jump() {
-
     if (isGrounded) {
-      // sound effect
       playerSound.PlayJumpAudioClip();
       velocity.y = jumpForce;
     } else if (IsAbleToWallJump()) {
@@ -161,15 +171,20 @@ public class PlayerMovement : PhysicObject {
   /// Make the player slowly slide a wall if his velocity is below 0.01
   /// </summary>
   public void SlideWall() {
-    animator.SetBool("isSliding", IsAbleToWallJump());
 
-    if (animator.GetBool("isSliding")) {
-      wallJumpDirectionX = isFacingRight ? -1 : 1;
-      if (animator.GetFloat("moveY") < 0.01f) {
-        Debug.Log("slidingspeed " + slidingSpeed);
-        velocity.y = slidingSpeed * -1;
-      }
-    } 
+    // player can be "stick" to the wall
+    if (!animator.GetBool("isSliding")) {
+      isStickToWall = true;
+      unstickFrameCounter = unstickFrame;
+    }
+
+    animator.SetBool("isSliding", true);
+    wallJumpDirectionX = isFacingRight ? -1 : 1;
+
+    // make player slide
+    if (animator.GetFloat("moveY") < 0.01f) {
+      velocity.y = slidingSpeed * -1;
+    }
   }
 
   /// <summary>
@@ -219,6 +234,15 @@ public class PlayerMovement : PhysicObject {
   }
 
   /// <summary>
+  /// Sets the directional input.
+  /// </summary>
+  /// <returns>The directional input.</returns>
+  /// <param name="input">input.</param>
+  public void SetRawDirectionalInput(Vector2 input) {
+    rawDirectionalInput = input;
+  }
+
+  /// <summary>
   /// Does the player hit the ground ?
   /// </summary>
   /// <returns>bool</returns>
@@ -248,5 +272,21 @@ public class PlayerMovement : PhysicObject {
   /// <returns>bool</returns>
   private bool IsCollidingWithWall() {
     return Physics2D.OverlapCircle(wallJumpCheck.position, 0.2f, wallJumpLayer) ? true : false;
+  }
+
+  /// <summary>
+  /// Stick player for x frames to know if he want to be unstick
+  /// from the wall or take his direction for a wall jump
+  /// </summary>
+  private void UnstickFromWallTimer() {
+    if (rawDirectionalInput.x == wallJumpDirectionX) {
+      if (unstickFrameCounter > 0) {
+        velocity.x = 0;
+        unstickFrameCounter--;
+      } else {
+        unstickFrameCounter = unstickFrame;
+        isStickToWall = false;
+      }
+    }
   }
 }

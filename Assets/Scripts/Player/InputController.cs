@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour {
 
   void Update() {
     SetPlayerDirectionalInput(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    SetPlayerRawDirectionalInput(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     ControlPlayerMovement();
   }
 
@@ -22,6 +23,16 @@ public class InputController : MonoBehaviour {
   /// <param name="vertical">Vertical.</param>
   void SetPlayerDirectionalInput(float horizontal, float vertical) {
     playerMovement.SetDirectionalInput(new Vector2(horizontal, vertical));
+  }
+
+  /// <summary>
+  /// Sets the player mouvement raw directional input.
+  /// </summary>
+  /// <returns>The player directional input.</returns>
+  /// <param name="horizontal">Raw Horizontal.</param>
+  /// <param name="vertical">Raw Vertical.</param>
+  void SetPlayerRawDirectionalInput(float horizontal, float vertical) {
+    playerMovement.SetRawDirectionalInput(new Vector2(horizontal, vertical));
   }
 
   /// <summary>
