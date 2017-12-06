@@ -8,7 +8,6 @@ using UnityEngine;
 public class PlayerMovement : PhysicObject {
   // Player's component
   private Animator animator;
-
   public PlayerSound playerSound;
 
   // player's params
@@ -27,6 +26,7 @@ public class PlayerMovement : PhysicObject {
   private bool isFacingRight = true;
   private float speed = 0f;
   private bool isWallJumping = false;
+  private bool isWallJumpingTakeOff = false;
   private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
   private int wallJumpDirectionX;
@@ -115,9 +115,17 @@ public class PlayerMovement : PhysicObject {
       playerSound.PlayJumpAudioClip();
       velocity.y = jumpForce;
     } else if (IsAbleToWallJump()) {
+
+      // player will be flipped
       isNeedToSwitchDirection = true;
+
+      // use to change velocity on the first frame of the jump
       isVelocityForWallJumping = true;
+
       isWallJumping = true;
+
+      // does the player just want to leave the wall without make a long wall jump
+      isWallJumpingTakeOff = (rawDirectionalInput.x == 0); 
     }
   }
 
@@ -136,7 +144,8 @@ public class PlayerMovement : PhysicObject {
   public void WallJump() {
 
     // wall jump direction (if facing right, should wall jump to the left)
-    float wallJumpLeapX = wallJumpDirectionX * wallJumpLeap.x;
+    Vector2 leap = isWallJumpingTakeOff ? wallJumpLeap / 2 : wallJumpLeap;
+    float wallJumpLeapX = wallJumpDirectionX * leap.x;
 
     // change player direction
     if (isNeedToSwitchDirection) {
