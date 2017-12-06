@@ -17,6 +17,7 @@ public class PlayerMovement : PhysicObject {
   public float maxSlidingSpeed = 2f;
   public float jumpForce = 7.0f;
   public Vector2 wallJumpLeap = new Vector2(8, 12);
+  public Vector2 climbWallLeap = new Vector2(12, 12);
   public Transform wallJumpCheck;
   public LayerMask wallJumpLayer;
 
@@ -26,6 +27,7 @@ public class PlayerMovement : PhysicObject {
   private bool isFacingRight = true;
   private float speed = 0f;
   private bool isWallJumping = false;
+  private bool isWallClimbing = false;
   private bool isWallJumpingTakeOff = false;
   private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
@@ -63,16 +65,19 @@ public class PlayerMovement : PhysicObject {
     if (animator.GetBool("isSliding") && isStickToWall) {
       UnstickFromWallTimer();
     } else {
-
-      // default velocity
-      ComputeDefaultTargetVelocity();
-
       // wall jumping velocity
       if (isWallJumping) {
-        WallJump();
+        if (isWallClimbing) {
+          ClimpWall();
+        } else {
+          WallJump();
+        }
       } else {
         // player direction
         Flip();
+
+        // default velocity
+        ComputeDefaultTargetVelocity();
       }
 
     }
@@ -125,7 +130,10 @@ public class PlayerMovement : PhysicObject {
       isWallJumping = true;
 
       // does the player just want to leave the wall without make a long wall jump
-      isWallJumpingTakeOff = (rawDirectionalInput.x == 0); 
+      isWallJumpingTakeOff = (rawDirectionalInput.x == 0);
+
+      // jump on the same wall
+      isWallClimbing = (rawDirectionalInput.x == (wallJumpDirectionX * -1));
     }
   }
 
@@ -145,21 +153,20 @@ public class PlayerMovement : PhysicObject {
 
     // wall jump direction (if facing right, should wall jump to the left)
     Vector2 leap = isWallJumpingTakeOff ? wallJumpLeap / 2 : wallJumpLeap;
+
     float wallJumpLeapX = wallJumpDirectionX * leap.x;
 
-    // change player direction
-    if (isNeedToSwitchDirection) {
-      // sound effect
+    // inverse direction
+    if (isNeedToSwitchDirection && !isWallClimbing) {
+      isNeedToSwitchDirection = false;
       playerSound.PlayJumpAudioClip();
-
-      // inverse direction
       InverseScaleX();
       isFacingRight = !isFacingRight;
-      isNeedToSwitchDirection = false;
     }
 
     // does velocity need to be changed to wallJumpLeapY value
     if (velocity.y != wallJumpLeap.y && isVelocityForWallJumping) {
+      Debug.Log("should");
       velocity.y = wallJumpLeap.y;
       isVelocityForWallJumping = false;
     } else {
@@ -172,6 +179,41 @@ public class PlayerMovement : PhysicObject {
     // wall jumping is over
     if (isGrounded || IsCollidingWithWall()) {
       isWallJumping = false;
+      wallJumpDirectionX = 0;
+    }
+  }
+
+  public void ClimpWall() {
+
+    // wall jump direction (if facing right, should wall jump to the left)
+    float climpLeapX = wallJumpDirectionX * climbWallLeap.x;
+    float climpLeapY = climbWallLeap.y;
+
+    if (isVelocityForWallJumping) {
+      // update for 4 frames
+      velocity.x = (wallJumpDirectionX * -1) * climbWallLeap.x;
+      velocity.y = velocity.y + (climbWallLeap.y / 4);
+      targetVelocity = new Vector2(climpLeapX, Vector2.zero.y);
+
+      if (velocity.y > climbWallLeap.y) {
+        isVelocityForWallJumping = false;
+      }
+
+    } else {
+      velocity.x = wallJumpDirectionX * climbWallLeap.x;
+      targetVelocity = new Vector2(-climpLeapX, Vector2.zero.y);
+
+      if (IsCollidingWithWall()) {
+        isWallJumping = false;
+        isWallClimbing = false;
+        wallJumpDirectionX = 0;
+      }
+    }
+
+    // wall jumping is over
+    if (isGrounded) {
+      isWallJumping = false;
+      isWallClimbing = false;
       wallJumpDirectionX = 0;
     }
   }
