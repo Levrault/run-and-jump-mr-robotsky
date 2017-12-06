@@ -1607,7 +1607,7 @@ MonoBehaviour:
   maxSlidingSpeed: 2
   jumpForce: 13
   wallJumpLeap: {x: 8, y: 12}
-  sameWallJumpLeap: {x: 8, y: 12}
+  climbWallLeap: {x: 4, y: 6}
   wallJumpCheck: {fileID: 757434017}
   wallJumpLayer:
     serializedVersion: 2

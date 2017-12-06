@@ -186,19 +186,29 @@ public class PlayerMovement : PhysicObject {
   public void ClimpWall() {
 
     // wall jump direction (if facing right, should wall jump to the left)
-    float wallJumpLeapX = wallJumpDirectionX * climbWallLeap.x;
-    float wallJumpLeapY = climbWallLeap.y;
+    float climpLeapX = wallJumpDirectionX * climbWallLeap.x;
+    float climpLeapY = climbWallLeap.y;
 
-    if (velocity.y != climbWallLeap.y && isVelocityForWallJumping) {
+    if (isVelocityForWallJumping) {
+      // update for 4 frames
       velocity.x = (wallJumpDirectionX * -1) * climbWallLeap.x;
-      velocity.y = climbWallLeap.y;
-      isVelocityForWallJumping = false;
+      velocity.y = velocity.y + (climbWallLeap.y / 4);
+      targetVelocity = new Vector2(climpLeapX, Vector2.zero.y);
+
+      if (velocity.y > climbWallLeap.y) {
+        isVelocityForWallJumping = false;
+      }
+
     } else {
       velocity.x = wallJumpDirectionX * climbWallLeap.x;
-    }
+      targetVelocity = new Vector2(-climpLeapX, Vector2.zero.y);
 
-    // new velocity for the next frame
-    targetVelocity = new Vector2(wallJumpLeapX, Vector2.up.y);
+      if (IsCollidingWithWall()) {
+        isWallJumping = false;
+        isWallClimbing = false;
+        wallJumpDirectionX = 0;
+      }
+    }
 
     // wall jumping is over
     if (isGrounded) {
