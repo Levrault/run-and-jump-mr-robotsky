@@ -17,7 +17,7 @@ public class PlayerMovement : PhysicObject {
   public float maxSlidingSpeed = 2f;
   public float jumpForce = 7.0f;
   public Vector2 wallJumpLeap = new Vector2(8, 12);
-  public Vector2 sameWallJumpLeap = new Vector2(12, 12);
+  public Vector2 climbWallLeap = new Vector2(12, 12);
   public Transform wallJumpCheck;
   public LayerMask wallJumpLayer;
 
@@ -27,7 +27,7 @@ public class PlayerMovement : PhysicObject {
   private bool isFacingRight = true;
   private float speed = 0f;
   private bool isWallJumping = false;
-  private bool isSameWallJumping = false;
+  private bool isWallClimbing = false;
   private bool isWallJumpingTakeOff = false;
   private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
@@ -67,8 +67,8 @@ public class PlayerMovement : PhysicObject {
     } else {
       // wall jumping velocity
       if (isWallJumping) {
-        if (isSameWallJumping) {
-          SameWallJump();
+        if (isWallClimbing) {
+          ClimpWall();
         } else {
           WallJump();
         }
@@ -133,7 +133,7 @@ public class PlayerMovement : PhysicObject {
       isWallJumpingTakeOff = (rawDirectionalInput.x == 0);
 
       // jump on the same wall
-      isSameWallJumping = (rawDirectionalInput.x == (wallJumpDirectionX * -1));
+      isWallClimbing = (rawDirectionalInput.x == (wallJumpDirectionX * -1));
     }
   }
 
@@ -157,7 +157,7 @@ public class PlayerMovement : PhysicObject {
     float wallJumpLeapX = wallJumpDirectionX * leap.x;
 
     // inverse direction
-    if (isNeedToSwitchDirection && !isSameWallJumping) {
+    if (isNeedToSwitchDirection && !isWallClimbing) {
       isNeedToSwitchDirection = false;
       playerSound.PlayJumpAudioClip();
       InverseScaleX();
@@ -183,18 +183,18 @@ public class PlayerMovement : PhysicObject {
     }
   }
 
-  public void SameWallJump() {
+  public void ClimpWall() {
 
     // wall jump direction (if facing right, should wall jump to the left)
-    float wallJumpLeapX = wallJumpDirectionX * sameWallJumpLeap.x;
-    float wallJumpLeapY = sameWallJumpLeap.y;
+    float wallJumpLeapX = wallJumpDirectionX * climbWallLeap.x;
+    float wallJumpLeapY = climbWallLeap.y;
 
-    if (velocity.y != sameWallJumpLeap.y && isVelocityForWallJumping) {
-      velocity.x = (wallJumpDirectionX * -1) * sameWallJumpLeap.x;
-      velocity.y = sameWallJumpLeap.y;
+    if (velocity.y != climbWallLeap.y && isVelocityForWallJumping) {
+      velocity.x = (wallJumpDirectionX * -1) * climbWallLeap.x;
+      velocity.y = climbWallLeap.y;
       isVelocityForWallJumping = false;
     } else {
-      velocity.x = wallJumpDirectionX * sameWallJumpLeap.x;
+      velocity.x = wallJumpDirectionX * climbWallLeap.x;
     }
 
     // new velocity for the next frame
@@ -203,7 +203,7 @@ public class PlayerMovement : PhysicObject {
     // wall jumping is over
     if (isGrounded) {
       isWallJumping = false;
-      isSameWallJumping = false;
+      isWallClimbing = false;
       wallJumpDirectionX = 0;
     }
   }
