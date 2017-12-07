@@ -13,8 +13,8 @@ public class PlayerMovement : PhysicObject {
   // player's params
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
-  public float slidingSpeed = 0.1f;
-  public float maxSlidingSpeed = 2f;
+  public float slidingSpeed = 1f;
+  public float maxSlidingSpeed = 4f;
   public float jumpForce = 7.0f;
   public Vector2 wallJumpLeap = new Vector2(8, 12);
   public Vector2 climbWallLeap = new Vector2(12, 12);
@@ -32,7 +32,6 @@ public class PlayerMovement : PhysicObject {
   private const int climbJumpFrame = 5;
   private int wallJumpFrameCounter;
   private bool isWallJumpingTakeOff = false;
-  private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
   private int wallJumpDirectionX;
   private float defaultSlidingSpeed;
@@ -126,9 +125,6 @@ public class PlayerMovement : PhysicObject {
 
       // player will be flipped
       isNeedToSwitchDirection = true;
-
-      // use to change velocity on the first frame of the jump
-      isVelocityForWallJumping = true;
 
       isWallJumping = true;
 
