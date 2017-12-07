@@ -28,6 +28,9 @@ public class PlayerMovement : PhysicObject {
   private float speed = 0f;
   private bool isWallJumping = false;
   private bool isWallClimbing = false;
+  private const int wallJumpFrame = 4;
+  private const int climbJumpFrame = 5;
+  private int wallJumpFrameCounter;
   private bool isWallJumpingTakeOff = false;
   private bool isVelocityForWallJumping = false;
   private bool isNeedToSwitchDirection = false;
@@ -68,7 +71,7 @@ public class PlayerMovement : PhysicObject {
       // wall jumping velocity
       if (isWallJumping) {
         if (isWallClimbing) {
-          ClimpWall();
+          ClimbWall();
         } else {
           WallJump();
         }
@@ -133,7 +136,13 @@ public class PlayerMovement : PhysicObject {
       isWallJumpingTakeOff = (rawDirectionalInput.x == 0);
 
       // jump on the same wall
-      isWallClimbing = (rawDirectionalInput.x == (wallJumpDirectionX * -1));
+      if (rawDirectionalInput.x == (wallJumpDirectionX * -1)) {
+        isWallClimbing = true;
+        wallJumpFrameCounter = climbJumpFrame;
+      } else {
+        isWallClimbing = false;
+        wallJumpFrameCounter = wallJumpFrame;
+      }
     }
   }
 
@@ -152,8 +161,7 @@ public class PlayerMovement : PhysicObject {
   public void WallJump() {
 
     // wall jump direction (if facing right, should wall jump to the left)
-    Vector2 leap = isWallJumpingTakeOff ? wallJumpLeap / 2 : wallJumpLeap;
-
+    Vector2 leap = isWallJumpingTakeOff ? (wallJumpLeap / 2) : wallJumpLeap;
     float wallJumpLeapX = wallJumpDirectionX * leap.x;
 
     // inverse direction
@@ -165,10 +173,9 @@ public class PlayerMovement : PhysicObject {
     }
 
     // does velocity need to be changed to wallJumpLeapY value
-    if (velocity.y != wallJumpLeap.y && isVelocityForWallJumping) {
-      Debug.Log("should");
+    if (wallJumpFrameCounter > 0) {
+      wallJumpFrameCounter--;
       velocity.y = wallJumpLeap.y;
-      isVelocityForWallJumping = false;
     } else {
       DefaultVelocityEquation();
     }
@@ -178,40 +185,35 @@ public class PlayerMovement : PhysicObject {
 
     // wall jumping is over
     if (isGrounded || IsCollidingWithWall()) {
+      wallJumpFrameCounter = wallJumpFrame;
       isWallJumping = false;
       wallJumpDirectionX = 0;
     }
   }
 
-  public void ClimpWall() {
+  /// <summary>
+  /// Let the player climb a wall
+  /// </summary>
+  public void ClimbWall() {
 
     // wall jump direction (if facing right, should wall jump to the left)
-    float climpLeapX = wallJumpDirectionX * climbWallLeap.x;
-    float climpLeapY = climbWallLeap.y;
+    float climbLeapX = wallJumpDirectionX * climbWallLeap.x;
+    float climbLeapY = climbWallLeap.y;
+    bool hasStopClimbing = false;
 
-    if (isVelocityForWallJumping) {
-      // update for 4 frames
-      velocity.x = (wallJumpDirectionX * -1) * climbWallLeap.x;
-      velocity.y = velocity.y + (climbWallLeap.y / 4);
-      targetVelocity = new Vector2(climpLeapX, Vector2.zero.y);
-
-      if (velocity.y > climbWallLeap.y) {
-        isVelocityForWallJumping = false;
-      }
-
+    if (wallJumpFrameCounter > 0) {
+      wallJumpFrameCounter--;
+      velocity.y = climbLeapY;
+      targetVelocity = new Vector2(climbLeapX, Vector2.zero.y);
+      Debug.Log(targetVelocity);
     } else {
-      velocity.x = wallJumpDirectionX * climbWallLeap.x;
-      targetVelocity = new Vector2(-climpLeapX, Vector2.zero.y);
-
-      if (IsCollidingWithWall()) {
-        isWallJumping = false;
-        isWallClimbing = false;
-        wallJumpDirectionX = 0;
-      }
+      targetVelocity = new Vector2(-climbLeapX, Vector2.zero.y);
+      hasStopClimbing = IsCollidingWithWall();
     }
 
     // wall jumping is over
-    if (isGrounded) {
+    if (isGrounded || hasStopClimbing) {
+      wallJumpFrameCounter = wallJumpFrame;
       isWallJumping = false;
       isWallClimbing = false;
       wallJumpDirectionX = 0;
