@@ -11,6 +11,7 @@ public class PlayerMovement : PhysicObject {
   public PlayerSound playerSound;
 
   // player's params
+  private SpriteRenderer sprite;
   public float walkingSpeed = 4f;
   public float runningSpeed = 7.0f;
   public float slidingSpeed = 1f;
@@ -28,8 +29,9 @@ public class PlayerMovement : PhysicObject {
   private float speed = 0f;
   private bool isWallJumping = false;
   private bool isWallClimbing = false;
+  private bool isSliding = false;
   private const int wallJumpFrame = 4;
-  private const int climbJumpFrame = 5;
+  private const int climbJumpFrame = 8;
   private int wallJumpFrameCounter;
   private bool isWallJumpingTakeOff = false;
   private bool isNeedToSwitchDirection = false;
@@ -42,6 +44,7 @@ public class PlayerMovement : PhysicObject {
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
     playerSound = (PlayerSound) GetComponent(typeof(PlayerSound));
+    sprite = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
     defaultSlidingSpeed = slidingSpeed;
   }
 
@@ -62,9 +65,10 @@ public class PlayerMovement : PhysicObject {
     animator.SetFloat("moveX", speed);
     animator.SetFloat("moveY", velocity.y);
     animator.SetBool("isGrounded", isGrounded);
+    animator.SetBool("isSliding", isSliding);
 
     // stick to the wall delay
-    if (animator.GetBool("isSliding") && isStickToWall) {
+    if (isSliding && isStickToWall) {
       UnstickFromWallTimer();
     } else {
       // wall jumping velocity
@@ -88,7 +92,8 @@ public class PlayerMovement : PhysicObject {
     if (IsAbleToWallJump()) {
       SlideWall();
     } else {
-      animator.SetBool("isSliding", false);
+      isSliding = false;
+      sprite.flipX = false;
     }
 
   }
@@ -118,6 +123,7 @@ public class PlayerMovement : PhysicObject {
   /// Set the player to jump
   /// </summary>
   public void Jump() {
+
     if (isGrounded) {
       playerSound.PlayJumpAudioClip();
       velocity.y = jumpForce;
@@ -161,7 +167,7 @@ public class PlayerMovement : PhysicObject {
     float wallJumpLeapX = wallJumpDirectionX * leap.x;
 
     // inverse direction
-    if (isNeedToSwitchDirection && !isWallClimbing) {
+    if (isNeedToSwitchDirection) {
       isNeedToSwitchDirection = false;
       playerSound.PlayJumpAudioClip();
       InverseScaleX();
@@ -197,6 +203,11 @@ public class PlayerMovement : PhysicObject {
     float climbLeapY = climbWallLeap.y;
     bool hasStopClimbing = false;
 
+    if (isNeedToSwitchDirection) {
+      isNeedToSwitchDirection = false;
+      playerSound.PlayJumpAudioClip();
+    }
+
     if (wallJumpFrameCounter > 0) {
       wallJumpFrameCounter--;
       velocity.y = climbLeapY;
@@ -222,12 +233,14 @@ public class PlayerMovement : PhysicObject {
   public void SlideWall() {
 
     // player can be "stick" to the wall
-    if (!animator.GetBool("isSliding")) {
+    if (!isSliding) {
       isStickToWall = true;
       unstickFrameCounter = unstickFrame;
+      speed = 0f;
+      sprite.flipX = true;
     }
 
-    animator.SetBool("isSliding", true);
+    isSliding = true;
     wallJumpDirectionX = isFacingRight ? -1 : 1;
 
     // make player slide
