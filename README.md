@@ -33,6 +33,7 @@ Sounds effects are under creative commons license (source https://freesound.org)
 - Game over arcade by [myfox14](http://freesound.org/people/myfox14/)
 - Menu select by [killkhan](http://freesound.org/people/killkhan/)
 - Level win by [Tuudurt](https://freesound.org/people/Tuudurt/sounds/258142/)
+- Bad Explosion by [deleted_user_364925](https://freesound.org/people/deleted_user_364925/)
 
 
 
