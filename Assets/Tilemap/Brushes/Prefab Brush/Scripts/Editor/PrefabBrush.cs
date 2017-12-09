@@ -13,6 +13,7 @@ namespace UnityEditor
 		public GameObject[] m_Prefabs;
 		public float m_PerlinScale = 0.5f;
 		public int m_Z;
+		public Vector3 offset = new Vector3(.5f, .5f, .5f);
 
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
 		{
@@ -27,7 +28,7 @@ namespace UnityEditor
 			if (instance != null)
 			{
 				instance.transform.SetParent(brushTarget.transform);
-				instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3Int(position.x, position.y, m_Z) + new Vector3(.5f, .5f, .5f)));
+				instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3Int(position.x, position.y, m_Z) + offset));
 			}
 		}
 
