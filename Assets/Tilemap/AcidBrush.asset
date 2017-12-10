@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
-  m_Name: LandMinesBrush
+  m_Name: AcidBrush
   m_EditorClassIdentifier: 
   m_Prefabs:
-  - {fileID: 1226621449042466, guid: 41448bb57054f27419ca06bdc89d7f4d, type: 2}
+  - {fileID: 1551836398868998, guid: e125e61eee18fcf4fb210873787def25, type: 2}
   m_PerlinScale: 0.5
   m_Z: 0
-  offset: {x: 0, y: 0, z: 0.5}
+  offset: {x: 0.5, y: 0.5, z: 0.5}
