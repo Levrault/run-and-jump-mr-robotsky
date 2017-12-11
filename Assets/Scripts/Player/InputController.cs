@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manage input 
+/// </summary>
 public class InputController : MonoBehaviour {
   public PlayerMovement playerMovement;
 

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Destroy a gameObject
+/// Inactive player's input
 /// </summary>
-public class DestroyGameObject : StateMachineBehaviour {
+public class DestroyInputController : StateMachineBehaviour {
 
 
-	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		Destroy(animator.gameObject);
+		animator.gameObject.GetComponent<PlayerMovement>().Idle();
+		Destroy(animator.gameObject.GetComponent<InputController>());
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
