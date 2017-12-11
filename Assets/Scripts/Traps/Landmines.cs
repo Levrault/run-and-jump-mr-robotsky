@@ -8,13 +8,15 @@ using UnityEngine;
 /// </summary>
 public class Landmines : MonoBehaviour {
 
-  // Landmine's params
   public float timeBeforeExplosion = 1f;
-  public LandminesSound landminesSound;
-
-  // Landmine's component
+  public GameObject explosionGameObject;
   private Animator animator;
+  private LandminesSound landminesSound;
   private float delaySound = .5f;
+
+  void Awake() {
+    explosionGameObject.SetActive(false);
+  }
 
   void Start() {
     animator = (Animator) GetComponent(typeof(Animator));
@@ -29,7 +31,7 @@ public class Landmines : MonoBehaviour {
   void OnTriggerEnter2D(Collider2D other) {
     if (other.tag == "Player") {
       StartCoroutine(Explode(timeBeforeExplosion));
-      StartCoroutine(ExplosionSound(timeBeforeExplosion+ delaySound));
+      StartCoroutine(ExplosionEffect(timeBeforeExplosion + delaySound));
     }
   }
 
@@ -44,12 +46,13 @@ public class Landmines : MonoBehaviour {
   }
 
   /// <summary>
-  /// LandMine explosion sound
+  /// Behavior when the mine explode
   /// </summary>
   /// <param name="time"></param>
   /// <returns></returns>
-  IEnumerator ExplosionSound(float time) {
+  IEnumerator ExplosionEffect(float time) {
     yield return new WaitForSeconds(time);
     landminesSound.PlayExplosionAudioClip();
+    explosionGameObject.SetActive(true);
   }
 }
