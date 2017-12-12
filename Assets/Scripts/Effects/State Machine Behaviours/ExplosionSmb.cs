@@ -5,12 +5,14 @@ using UnityEngine;
 /// <summary>
 /// Inactive player 
 /// </summary>
-public class DestroyPlayer : StateMachineBehaviour {
+public class ExplosionSmb : StateMachineBehaviour {
 
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		animator.gameObject.SetActive(false);
+		Destroy(animator.gameObject.GetComponent<SpriteRenderer>());
+		Destroy(animator.gameObject.GetComponent<Rigidbody2D>());
+		animator.gameObject.GetComponent<Explosion>().Explode();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
