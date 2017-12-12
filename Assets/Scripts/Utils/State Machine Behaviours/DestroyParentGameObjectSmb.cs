@@ -5,12 +5,12 @@ using UnityEngine;
 /// <summary>
 /// Destroy a gameObject
 /// </summary>
-public class DestroyGameObject : StateMachineBehaviour {
+public class DestroyParentGameObjectSmb : StateMachineBehaviour {
 
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		Destroy(animator.gameObject);
+		Destroy(animator.gameObject.transform.parent.gameObject);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
