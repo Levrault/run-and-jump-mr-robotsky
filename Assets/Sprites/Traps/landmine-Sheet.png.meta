@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: db38dcd3430a54ea8921a0f508c67fff
-timeCreated: 1512737621
+timeCreated: 1513080097
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -130,10 +130,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: landmine-Sheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 7
         y: 0
-        width: 64
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

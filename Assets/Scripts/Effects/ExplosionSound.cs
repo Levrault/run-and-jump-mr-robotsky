@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Traps (danger) sound
 /// </summary>
-public class LandminesSound : MonoBehaviour {
+public class ExplosionSound : MonoBehaviour {
 
   public AudioClip explosionSound;
 
