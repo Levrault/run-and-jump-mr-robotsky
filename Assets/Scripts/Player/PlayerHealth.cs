@@ -8,9 +8,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour {
   public int health = 3;
   private int currentHealth;
+  private const int blinkFrame = 4;
+  private int blinkCounter = 0;
+  private SpriteRenderer spriteRenderer;
 
   void Start() {
     currentHealth = health;
+    spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
   /// <summary>
@@ -20,6 +24,9 @@ public class PlayerHealth : MonoBehaviour {
     currentHealth--;
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
+    } else {
+      blinkCounter = 0;
+      StartCoroutine(Blink());
     }
   }
 
@@ -31,5 +38,22 @@ public class PlayerHealth : MonoBehaviour {
     if (currentHealth < 3 && currentHealth > 0) {
       currentHealth++;
     }
+  }
+
+  /// <summary>
+  /// Make the player blink
+  /// </summary>
+  /// <returns></returns>
+  IEnumerator Blink() {
+    yield return new WaitForSeconds(.125f);
+
+    if (blinkCounter <= blinkFrame) {
+      spriteRenderer.enabled = !spriteRenderer.enabled;
+      blinkCounter++;
+    } else {
+      spriteRenderer.enabled = true;
+    }
+
+    StartCoroutine(Blink());
   }
 }
