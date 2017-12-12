@@ -12,6 +12,8 @@ public class PlayerDeathSmb : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		animator.gameObject.GetComponent<PlayerMovement>().Idle();
 		Destroy(animator.gameObject.GetComponent<InputController>());
+		Destroy(animator.gameObject.GetComponent<PlayerMovement>());
+		Destroy(animator.gameObject.GetComponent<PlayerHealth>());
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
