@@ -11,10 +11,12 @@ public class PlayerHealth : MonoBehaviour {
   private const int blinkFrame = 4;
   private int blinkCounter = 0;
   private SpriteRenderer spriteRenderer;
+  private HUDController hudController;
 
   void Start() {
     currentHealth = health;
     spriteRenderer = GetComponent<SpriteRenderer>();
+    hudController = GetComponent<HUDController>();
   }
 
   /// <summary>
@@ -22,7 +24,7 @@ public class PlayerHealth : MonoBehaviour {
   /// </summary>
   public void TakeDamage() {
     currentHealth--;
-    HUDManager.instance.UpdateHealthBar(currentHealth);
+    hudController.UpdateHealthBar(currentHealth);
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
     } else {
