@@ -6,18 +6,9 @@ using UnityEngine.UI;
 /// <summary>
 /// Update HUD of the player
 /// </summary>
-public class HUDManager : MonoBehaviour {
-  public static HUDManager instance = null;
+public class HUDController : MonoBehaviour {
 	public GameObject score;
 	public GameObject healthBar;
-
-  void Awake() {
-    if (instance == null) {
-      instance = this;
-    } else if (instance != this) {
-      Destroy(gameObject);
-    }
-  }
 
 	/// <summary>
 	/// Update player score
