@@ -38,7 +38,7 @@ public class CameraFollow : MonoBehaviour {
   }
 
   void LateUpdate() {
-    if (isFollowingTarget) {
+    if (isFollowingTarget && target != null) {
       FollowMode();
     }
   }

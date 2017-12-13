@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour {
   /// </summary>
   public void TakeDamage() {
     currentHealth--;
+    HUDManager.instance.UpdateHealthBar(currentHealth);
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
     } else {
