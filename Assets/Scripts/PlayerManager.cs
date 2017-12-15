@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
   public static PlayerManager instance = null;
+  public int playersInGame = 1;
 
   void Awake() {
     if (instance == null) {
@@ -16,6 +17,7 @@ public class PlayerManager : MonoBehaviour {
       Destroy(gameObject);
     }
   }
+
 
   /// <summary>
   /// Damage a player
@@ -30,6 +32,7 @@ public class PlayerManager : MonoBehaviour {
   /// </summary>
   /// <param name="player"></param>
   public void KillPlayer(GameObject player) {
+    playersInGame--;
     player.GetComponent<Animator>().SetTrigger("isDeath");
   }
 }
