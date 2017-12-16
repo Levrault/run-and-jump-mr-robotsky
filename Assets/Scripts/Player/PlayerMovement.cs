@@ -212,7 +212,6 @@ public class PlayerMovement : PhysicObject {
       wallJumpFrameCounter--;
       velocity.y = climbLeapY;
       targetVelocity = new Vector2(climbLeapX, Vector2.zero.y);
-      Debug.Log(targetVelocity);
     } else {
       targetVelocity = new Vector2(-climbLeapX, Vector2.zero.y);
       hasStopClimbing = IsCollidingWithWall();
