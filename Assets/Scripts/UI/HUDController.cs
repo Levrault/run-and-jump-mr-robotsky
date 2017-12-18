@@ -7,16 +7,18 @@ using UnityEngine.UI;
 /// Update HUD of the player
 /// </summary>
 public class HUDController : MonoBehaviour {
-	public GameObject score;
+	public Text scoreText;
 	public GameObject healthBar;
+	private int score = 0;
 
 	/// <summary>
 	/// Update player score
 	/// </summary>
 	/// <param name="Player"></param>
-	/// <param name="score"></param>
-	public void UpdateScore(GameObject Player, int score) {
-
+	/// <param name="amount"></param>
+	public void UpdateScore(int amount) {
+		score += amount;
+		scoreText.text = score.ToString("000000");
 	}
 
 	/// <summary>

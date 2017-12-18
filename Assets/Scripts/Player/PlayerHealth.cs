@@ -25,7 +25,6 @@ public class PlayerHealth : MonoBehaviour {
   /// <param name="amount"></param>
   public void TakeDamage(int amount) {
     currentHealth = currentHealth - amount;
-    Debug.Log(currentHealth);
     hudController.UpdateHealthBar(currentHealth);
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
@@ -42,6 +41,7 @@ public class PlayerHealth : MonoBehaviour {
   public void RegainHealth() {
     if (currentHealth < 3 && currentHealth > 0) {
       currentHealth++;
+      hudController.UpdateHealthBar(currentHealth);
     }
   }
 

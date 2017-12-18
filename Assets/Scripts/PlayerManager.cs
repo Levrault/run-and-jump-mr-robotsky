@@ -18,6 +18,16 @@ public class PlayerManager : MonoBehaviour {
     }
   }
 
+  /// <summary>
+  /// Increase player score
+  /// </summary>
+  /// <param name="player"></param>
+  /// <param name="amount"></param>
+  public void IncreasePlayerScore(GameObject player, int amount) {
+    player.GetComponent<PlayerHealth>().RegainHealth();
+    player.GetComponent<HUDController>().UpdateScore(amount);
+  }
+
 
   /// <summary>
   /// Damage a player
