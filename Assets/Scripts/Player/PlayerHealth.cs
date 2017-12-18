@@ -34,6 +34,14 @@ public class PlayerHealth : MonoBehaviour {
   }
 
   /// <summary>
+  /// Kill the player
+  /// </summary>
+  public void InstantKill() {
+    currentHealth = 0;
+    PlayerManager.instance.KillPlayer(gameObject);
+  }
+
+  /// <summary>
   /// When player collect item, he can regain
   /// health if he needs it
   /// </summary>

@@ -4997,6 +4997,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114582296496300560, guid: 07831f35e446640ffa2eb4937338efb0,
+        type: 2}
+      propertyPath: limitY
+      value: -5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 07831f35e446640ffa2eb4937338efb0, type: 2}
   m_IsPrefabParent: 0
