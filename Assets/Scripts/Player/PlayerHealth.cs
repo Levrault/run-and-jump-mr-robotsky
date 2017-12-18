@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour {
   public int health = 3;
   private int currentHealth;
-  private const int blinkFrame = 4;
+  private const int blinkFrame = 20;
   private int blinkCounter = 0;
   private SpriteRenderer spriteRenderer;
   private HUDController hudController;
@@ -56,15 +56,17 @@ public class PlayerHealth : MonoBehaviour {
   /// </summary>
   /// <returns></returns>
   IEnumerator Blink() {
-    yield return new WaitForSeconds(.125f);
+    yield return new WaitForSeconds(Time.deltaTime);
 
-    if (blinkCounter <= blinkFrame) {
-      spriteRenderer.enabled = !spriteRenderer.enabled;
-      blinkCounter++;
-    } else {
+    // show/hide for 4 frames
+    spriteRenderer.enabled = (blinkCounter <= blinkFrame && blinkCounter%4 == 0);
+    blinkCounter++;
+
+    if (blinkCounter >= blinkFrame) {
       spriteRenderer.enabled = true;
+      blinkCounter = 0;
+    } else {
+      StartCoroutine(Blink());
     }
-
-    StartCoroutine(Blink());
   }
 }
