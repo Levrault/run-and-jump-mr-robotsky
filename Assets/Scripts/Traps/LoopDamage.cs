@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class LoopDamage : MonoBehaviour {
   public float loopingTimer = 1f;
+  public int amount = 1;
   private bool isLoopingDamage = false;
   private GameObject player;
 
@@ -40,7 +41,7 @@ public class LoopDamage : MonoBehaviour {
   /// <param name="time"></param>
   /// <returns></returns>
   IEnumerator DamageTimer(float time) {
-    PlayerManager.instance.DamagePlayer(player);
+    PlayerManager.instance.DamagePlayer(player, amount);
     yield return new WaitForSeconds(time);
 
     if (isLoopingDamage) {

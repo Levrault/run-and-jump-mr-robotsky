@@ -22,8 +22,10 @@ public class PlayerHealth : MonoBehaviour {
   /// <summary>
   /// When player take damage, his life reduce of 1 point
   /// </summary>
-  public void TakeDamage() {
-    currentHealth--;
+  /// <param name="amount"></param>
+  public void TakeDamage(int amount) {
+    currentHealth = currentHealth - amount;
+    Debug.Log(currentHealth);
     hudController.UpdateHealthBar(currentHealth);
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
@@ -31,14 +33,6 @@ public class PlayerHealth : MonoBehaviour {
       blinkCounter = 0;
       StartCoroutine(Blink());
     }
-  }
-
-  /// <summary>
-  /// Kill the player
-  /// </summary>
-  public void InstantKill() {
-    currentHealth = 0;
-    PlayerManager.instance.KillPlayer(gameObject);
   }
 
   /// <summary>
