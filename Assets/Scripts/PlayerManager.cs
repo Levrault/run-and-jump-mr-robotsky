@@ -23,8 +23,9 @@ public class PlayerManager : MonoBehaviour {
   /// Damage a player
   /// </summary>
   /// <param name="player"></param>
-  public void DamagePlayer(GameObject player) {
-    player.GetComponent<PlayerHealth>().TakeDamage();
+  /// <param name="amount"></param>
+  public void DamagePlayer(GameObject player, int amount) {
+    player.GetComponent<PlayerHealth>().TakeDamage(amount);
   }
 
   /// <summary>
