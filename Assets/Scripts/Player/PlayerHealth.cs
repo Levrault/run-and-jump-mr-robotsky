@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerHealth : MonoBehaviour {
   public int health = 3;
+  public bool godMode = false;
   private int currentHealth;
   private const int blinkFrame = 20;
   private int blinkCounter = 0;
@@ -31,6 +32,10 @@ public class PlayerHealth : MonoBehaviour {
     } else {
       blinkCounter = 0;
       StartCoroutine(Blink());
+    }
+
+    if (godMode) {
+      currentHealth = 3;
     }
   }
 
