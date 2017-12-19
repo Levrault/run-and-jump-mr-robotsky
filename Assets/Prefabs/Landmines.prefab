@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 58487045290399194}
   - component: {fileID: 114267882524851642}
   - component: {fileID: 114584128106728586}
+  - component: {fileID: 114941544999497488}
   m_Layer: 0
   m_Name: Landmines
   m_TagString: Untagged
@@ -165,7 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionGameObject: {fileID: 1564927670684488}
-  explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
 --- !u!114 &114806907228857732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +177,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e09b69afd894cd2ae4db8da7b1ae9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 1
+--- !u!114 &114941544999497488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408068665894868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550cae4fee87e4901a3d47af6105da4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
 --- !u!212 &212015440156373210
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -12,7 +12,7 @@ public class Landmines : MonoBehaviour {
   private Animator animator;
 
   void Awake() {
-    animator = (Animator) GetComponent(typeof(Animator));
+    animator = GetComponent<Animator>();
   }
 
   /// <summary>
