@@ -34,6 +34,7 @@ Sounds effects are under creative commons license (source https://freesound.org)
 - Menu select by [killkhan](http://freesound.org/people/killkhan/)
 - Level win by [Tuudurt](https://freesound.org/people/Tuudurt/sounds/258142/)
 - Bad Explosion by [deleted_user_364925](https://freesound.org/people/deleted_user_364925/)
+- Coin get by [plasterbrain](https://freesound.org/people/plasterbrain/)
 
 
 
