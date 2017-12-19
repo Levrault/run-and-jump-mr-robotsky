@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 114437409714120576}
   - component: {fileID: 114532273051357744}
   - component: {fileID: 114791097274918976}
+  - component: {fileID: 114942783631673818}
   - component: {fileID: 114403800847224578}
   m_Layer: 0
   m_Name: Player
@@ -436,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eef93ecabfdc46cd99a850fcdcf5a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 1927479501846716}
+  scoreText: {fileID: 0}
   healthBar: {fileID: 1021056624046254}
 --- !u!114 &114437409714120576
 MonoBehaviour:
@@ -490,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e09b69afd894cd2ae4db8da7b1ae9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 1
 --- !u!114 &114532273051357744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,6 +516,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionGameObject: {fileID: 1112077025326772}
+--- !u!114 &114942783631673818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1487857134068110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550cae4fee87e4901a3d47af6105da4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
 --- !u!114 &114945293832821206
 MonoBehaviour:

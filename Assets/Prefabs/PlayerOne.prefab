@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 114284284531322598}
   - component: {fileID: 114000685111670118}
   - component: {fileID: 114525918736479796}
+  - component: {fileID: 114134946479506710}
   - component: {fileID: 114861315548181196}
   m_Layer: 0
   m_Name: Player
@@ -362,6 +363,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114134946479506710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665136721224760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550cae4fee87e4901a3d47af6105da4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
 --- !u!114 &114229024634303408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,7 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionGameObject: {fileID: 1453844242744120}
-  explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
 --- !u!114 &114677731003160818
 MonoBehaviour:
   m_ObjectHideFlags: 1

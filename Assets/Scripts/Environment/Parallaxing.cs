@@ -25,7 +25,6 @@ public class Parallaxing:MonoBehaviour {
 
 		for (int i = 0; i < backgrounds.Length; i++) {
 			scales[i] = backgrounds[i].position.z * -1; 
-			
 		}
 	}
 	

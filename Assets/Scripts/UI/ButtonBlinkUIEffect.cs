@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Blink effect
 /// </summary>
-public class ButtonBlinkUiEffect:MonoBehaviour, ISelectHandler, IDeselectHandler {
+public class ButtonBlinkUIEffect:MonoBehaviour, ISelectHandler, IDeselectHandler {
 	public Text text; 
 
 	/// <summary>
@@ -22,7 +22,7 @@ public class ButtonBlinkUiEffect:MonoBehaviour, ISelectHandler, IDeselectHandler
 	/// UnBlink when deselected
 	/// </summary>
 	/// <param name="eventData"></param>
-	public void OnDeselect(BaseEventData data) {
+	public void OnDeselect(BaseEventData eventData) {
 		StopAllCoroutines();
 		text.color = new Color(text.color.r, text.color.g, text.color.b, 1f);
 	}
