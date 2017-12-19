@@ -9,6 +9,7 @@ public class PlayerMovement : PhysicObject {
   // Player's component
   private Animator animator;
   public PlayerSound playerSound;
+  public Canvas pointer;
 
   // player's params
   private SpriteRenderer sprite;
@@ -316,8 +317,16 @@ public class PlayerMovement : PhysicObject {
   /// </summary>
   private void InverseScaleX() {
     Vector3 scale = transform.localScale;
+    Vector3 dontScale = pointer.transform.localScale;
+    Debug.Log(dontScale);
     scale.x *= -1;
     transform.localScale = scale;
+
+    // since we don't want pointer to be reversed
+    dontScale.x *= -1;
+    pointer.transform.localScale = dontScale;
+
+
   }
 
   /// <summary>

@@ -1012,6 +1012,10 @@ Prefab:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1104639002}
+    - target: {fileID: 1257056026867782, guid: bdb3d355fc44c4c7c9c91d76eb536c26, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdb3d355fc44c4c7c9c91d76eb536c26, type: 2}
   m_IsPrefabParent: 0
@@ -5009,12 +5013,12 @@ Prefab:
     - target: {fileID: 224158665951782874, guid: 7ff65c7a7b2874440aa05a57b563ae26,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 346.5682
+      value: 347.5682
       objectReference: {fileID: 0}
     - target: {fileID: 224158665951782874, guid: 7ff65c7a7b2874440aa05a57b563ae26,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 256.2721
+      value: 256.7721
       objectReference: {fileID: 0}
     - target: {fileID: 224158665951782874, guid: 7ff65c7a7b2874440aa05a57b563ae26,
         type: 2}
