@@ -26,8 +26,7 @@ public class SoundManager : MonoBehaviour {
   /// </summary>
   /// <param name="clip"></param>
   public void PlaySingle(AudioClip clip) {
-    efxSource.clip = clip;
-    efxSource.Play();
+    efxSource.PlayOneShot(clip);
   }
 
 	/// <summary>

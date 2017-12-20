@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour {
   public bool godMode = false;
   public int health = 3;
   private int currentHealth;
+  private PlayerSound playerSound;
 
   // blink animation params
   private const int blinkFrame = 20;
@@ -26,6 +27,7 @@ public class PlayerHealth : MonoBehaviour {
     currentHealth = health;
     spriteRenderer = GetComponent<SpriteRenderer>();
     hudController = GetComponent<HUDController>();
+    playerSound = GetComponent<PlayerSound>();
   }
 
   /// <summary>
@@ -38,6 +40,7 @@ public class PlayerHealth : MonoBehaviour {
     if (!isInvulnerable) {
       currentHealth = currentHealth - amount;
       hudController.UpdateHealthBar(currentHealth);
+      playerSound.PlayerGetttingHurtAudioClip();
     }
 
     if (currentHealth == 0) {

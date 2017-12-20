@@ -9,6 +9,7 @@ public class PlayerSound : MonoBehaviour {
 
   public AudioClip jumpSound;
   public AudioClip landingSound;
+  public AudioClip hurtSound;
   public AudioClip gameOverSound;
 
 	public void PlayJumpAudioClip() {
@@ -17,6 +18,10 @@ public class PlayerSound : MonoBehaviour {
 
   public void PlayerLandingAudioClip() {
 		SoundManager.instance.PlaySingle(landingSound);
+  }
+
+  public void PlayerGetttingHurtAudioClip() {
+		SoundManager.instance.PlaySingle(hurtSound);
   }
 
 	public void PlayGameOverAudioClip() {
