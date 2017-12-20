@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Saw : MonoBehaviour {
+public class Repulse : MonoBehaviour {
 
   public Vector2 repulseForce = new Vector2(4,4);
   public int frame = 4;
