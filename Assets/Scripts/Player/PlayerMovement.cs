@@ -44,6 +44,7 @@ public class PlayerMovement : PhysicObject {
   private bool isInForceMode = false;
   private Vector2 force;
   private int forceFrameCounter;
+  private bool canChangeSpeed = true;
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
@@ -70,6 +71,7 @@ public class PlayerMovement : PhysicObject {
     animator.SetFloat("moveY", velocity.y);
     animator.SetBool("isGrounded", isGrounded);
     animator.SetBool("isSliding", isSliding);
+    canChangeSpeed = (velocity.y == 0);
 
     // stick to the wall delay
     if (isSliding && isStickToWall) {
@@ -108,21 +110,27 @@ public class PlayerMovement : PhysicObject {
   /// Set player to idle
   /// </summary>
   public void Idle() {
-    speed = 0f;
+    if (canChangeSpeed) {
+      speed = 0f;
+    }
   }
 
   /// <summary>
   /// Set player to walking
   /// </summary>
   public void Walk() {
-    speed = walkingSpeed;
+    if (canChangeSpeed) {
+      speed = walkingSpeed;
+    }
   }
 
   /// <summary>
   /// Set player to run (by increasing speed)
   /// </summary>
   public void Run() {
-    speed = runningSpeed;
+    if (canChangeSpeed) {
+      speed = runningSpeed;
+    }
   }
 
   /// <summary>
