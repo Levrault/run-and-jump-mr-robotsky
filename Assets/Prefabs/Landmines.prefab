@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSound: {fileID: 8300000, guid: f4de137bf2e864865a69cc99e4f88fd8, type: 3}
+  tickSound: {fileID: 8300000, guid: 4e7d72f27676044e28e49b9bf2bc2d6c, type: 3}
 --- !u!212 &212015440156373210
 SpriteRenderer:
   m_ObjectHideFlags: 1
