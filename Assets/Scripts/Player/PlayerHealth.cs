@@ -6,13 +6,21 @@ using UnityEngine;
 /// Manage the player's health
 /// </summary>
 public class PlayerHealth : MonoBehaviour {
-  public int health = 3;
+  // active godmode for debug
   public bool godMode = false;
+  public int health = 3;
   private int currentHealth;
+
+  // blink animation params
   private const int blinkFrame = 20;
   private int blinkCounter = 0;
   private SpriteRenderer spriteRenderer;
+
+  // updata player's HUD
   private HUDController hudController;
+
+  // let the player be invulnerable after being hit
+  private bool isInvulnerable;
 
   void Start() {
     currentHealth = health;
@@ -25,8 +33,13 @@ public class PlayerHealth : MonoBehaviour {
   /// </summary>
   /// <param name="amount"></param>
   public void TakeDamage(int amount) {
-    currentHealth = currentHealth - amount;
-    hudController.UpdateHealthBar(currentHealth);
+
+    // can be hit
+    if (!isInvulnerable) {
+      currentHealth = currentHealth - amount;
+      hudController.UpdateHealthBar(currentHealth);
+    }
+
     if (currentHealth == 0) {
       PlayerManager.instance.KillPlayer(gameObject);
     } else {
@@ -58,12 +71,14 @@ public class PlayerHealth : MonoBehaviour {
     yield return new WaitForSeconds(Time.deltaTime);
 
     // show/hide for 4 frames
-    spriteRenderer.enabled = (blinkCounter <= blinkFrame && blinkCounter%4 == 0);
+    spriteRenderer.enabled = (blinkCounter <= blinkFrame && blinkCounter % 4 == 0);
     blinkCounter++;
+    isInvulnerable = true;
 
     if (blinkCounter >= blinkFrame) {
       spriteRenderer.enabled = true;
       blinkCounter = 0;
+      isInvulnerable = false;
     } else {
       StartCoroutine(Blink());
     }
