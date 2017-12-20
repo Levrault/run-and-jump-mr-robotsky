@@ -10,9 +10,11 @@ public class Landmines : MonoBehaviour {
 
   public float timeBeforeExplosion = 1f;
   private Animator animator;
+  private ExplosionSound explosionSound;
 
   void Awake() {
     animator = GetComponent<Animator>();
+    explosionSound = GetComponent<ExplosionSound>();
   }
 
   /// <summary>
@@ -22,6 +24,7 @@ public class Landmines : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other) {
     if (other.tag == "Player") {
+      explosionSound.PlayTickAudioClip();
       StartCoroutine(Explode(timeBeforeExplosion));
     }
   }
