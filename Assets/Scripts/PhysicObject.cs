@@ -111,7 +111,7 @@ public class PhysicObject : MonoBehaviour {
   protected void DefaultVelocityEquation() {
     velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
   }
-
+  
   /// <summary>
   /// Applying movement/collision to our object
   /// </summary>

@@ -41,6 +41,9 @@ public class PlayerMovement : PhysicObject {
   private const int unstickFrame = 20;
   private int unstickFrameCounter;
   private bool isStickToWall = false;
+  private bool isInForceMode = false;
+  private Vector2 force;
+  private int forceFrameCounter;
 
   void Awake() {
     animator = (Animator) GetComponent(typeof(Animator));
@@ -79,6 +82,8 @@ public class PlayerMovement : PhysicObject {
         } else {
           WallJump();
         }
+      } else if (isInForceMode) {
+        ComputeForceVelocity();
       } else {
         // player direction
         Flip();
@@ -265,6 +270,44 @@ public class PlayerMovement : PhysicObject {
   }
 
   /// <summary>
+  /// Compute force velocity
+  /// </summary>
+  public void ComputeForceVelocity() {
+
+    // wall jump direction (if facing right, should wall jump to the left)
+    float leapX = force.x;
+    leapX *= (isFacingRight) ? -1 : 1;
+
+    // does velocity need to be changed to wallJumpLeapY value
+    if (forceFrameCounter > 0) {
+      forceFrameCounter--;
+      velocity.y = force.y;
+    } else {
+      DefaultVelocityEquation();
+    }
+
+    // new velocity for the next frame
+    targetVelocity = new Vector2(leapX, Vector2.zero.y);
+
+    // wall jumping is over
+    if (isGrounded || IsCollidingWithWall()) {
+      isInForceMode = false;
+      wallJumpDirectionX = 0;
+    }
+  }
+
+  /// <summary>
+  /// Add force to move player
+  /// </summary>
+  /// <param name="newForce"></param>
+  /// <param name="frame"></param>
+  public void AddForce(Vector2 newForce, int frame) {
+      force = newForce;
+      forceFrameCounter = frame;
+      isInForceMode = true;
+  }
+
+  /// <summary>
   /// Does the player touch a wall to execute a wall jump ?
   /// Does the player touch the ground and a wall (and isn't already walljumping)
   /// </summary>
@@ -318,7 +361,6 @@ public class PlayerMovement : PhysicObject {
   private void InverseScaleX() {
     Vector3 scale = transform.localScale;
     Vector3 dontScale = pointer.transform.localScale;
-    Debug.Log(dontScale);
     scale.x *= -1;
     transform.localScale = scale;
 
