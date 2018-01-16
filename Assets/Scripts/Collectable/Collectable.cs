@@ -9,11 +9,9 @@ public class Collectable : MonoBehaviour {
 
   public int amount = 100;
   private Animator animator;
-	private CollectableSound collectableSound;
 
   void Start() {
 		animator = GetComponent<Animator>();
-		collectableSound = GetComponent<CollectableSound>();
   }
 
   /// <summary>
@@ -23,8 +21,6 @@ public class Collectable : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other) {
     if (other.tag == "Player") {
-      PlayerManager.instance.IncreasePlayerScore(other.gameObject, amount);
-      collectableSound.PlayCollectedAudioClip();
 			animator.SetTrigger("isCollected");
     }
   }
