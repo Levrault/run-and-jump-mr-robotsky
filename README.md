@@ -4,6 +4,12 @@
 
 
 
+## Requirements
+
+This project use the [Corgi Engine](https://www.assetstore.unity3d.com/en/#!/content/26617) avaible on the assets store of Unity
+
+
+
 ## Tools
 
 The game is developed with the following tools:

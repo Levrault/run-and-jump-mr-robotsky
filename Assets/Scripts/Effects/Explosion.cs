@@ -9,10 +9,8 @@ using UnityEngine;
 public class Explosion : MonoBehaviour {
 
   public GameObject explosionGameObject;
-  private ExplosionSound explosionSound;
 
   void Awake() {
-    explosionSound = GetComponent<ExplosionSound>();
     explosionGameObject.SetActive(false);
   }
 
@@ -22,7 +20,6 @@ public class Explosion : MonoBehaviour {
   /// </summary>
   public void Explode() {
     explosionGameObject.SetActive(true);
-    explosionSound.PlayExplosionAudioClip();
     explosionGameObject.GetComponent<Animator>().SetTrigger("isTriggered");
   }
 }
