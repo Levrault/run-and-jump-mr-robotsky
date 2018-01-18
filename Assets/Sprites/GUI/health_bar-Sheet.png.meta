@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a56e50f11f22a486fa1668cd7bb13054
-timeCreated: 1516175621
+timeCreated: 1516348134
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -23,6 +23,12 @@ TextureImporter:
     21300032: healt_bar-Sheet_16
     21300034: healt_bar-Sheet_17
     21300036: healt_bar-Sheet_18
+    21300038: health_bar-Sheet_0
+    21300040: health_bar-Sheet_1
+    21300042: health_bar-Sheet_2
+    21300044: health_bar-Sheet_3
+    21300046: health_bar-Sheet_4
+    21300048: health_bar-Sheet_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -149,7 +155,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: healt_bar-Sheet_0
+      name: health_bar-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -163,7 +169,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: healt_bar-Sheet_1
+      name: health_bar-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -177,7 +183,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: healt_bar-Sheet_2
+      name: health_bar-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -191,7 +197,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: healt_bar-Sheet_3
+      name: health_bar-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -205,7 +211,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: healt_bar-Sheet_4
+      name: health_bar-Sheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -219,7 +225,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: healt_bar-Sheet_5
+      name: health_bar-Sheet_5
       rect:
         serializedVersion: 2
         x: 32
