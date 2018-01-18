@@ -13,6 +13,7 @@ namespace MoreMountains.CorgiEngine {
     public float TimeBeforeExitWallClinging = 0.5f;
 
     // keep track of the collision
+    [HideInInspector]
     public bool IsCollidingRight = false;
 
     /// <summary>
