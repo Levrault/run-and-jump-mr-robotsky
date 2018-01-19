@@ -552,20 +552,8 @@ AnimatorStateTransition:
     m_ConditionEvent: WallClinging
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: Jetpacking
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: Diving
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: LadderClimbing
-    m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: FiringDirection
-    m_EventTreshold: 3
-  - m_ConditionMode: 2
-    m_ConditionEvent: MeleeAttack
-    m_EventTreshold: 3
   - m_ConditionMode: 1
     m_ConditionEvent: Alive
     m_EventTreshold: 0
