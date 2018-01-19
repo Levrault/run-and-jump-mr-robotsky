@@ -15,4 +15,4 @@ MonoBehaviour:
   - {fileID: 1408068665894868, guid: 41448bb57054f27419ca06bdc89d7f4d, type: 2}
   m_PerlinScale: 0.5
   m_Z: 0
-  offset: {x: 0, y: 0.125, z: 0.5}
+  offset: {x: 0.5, y: 0.125, z: 0.5}
