@@ -1,6 +1,6 @@
 # Run and jump Mr Robotsky
 
-*Run and jump Mr Robotsky* is a small amateur video game made in my spare time. His purpose it to help me understand and practice some basic concepts of game design and unity development. 
+*Run and jump Mr Robotsky* is a small test project. I use it to learn how to make game design document, mockup, tilesets and etc. This project is no longer in development because the game is not enough fun. But I learn a lot which is nice. There's lot of missing feature, you need corgi engine but hey, you can use whatever you want.
 
 
 
@@ -78,4 +78,4 @@ Rating: E10
 
 **Similar competitive products**
 
-Super meat boy, binding of isaac, super mario bros
+Super meat boy, super mario bros
