@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 114161823228127108}
   - component: {fileID: 114531780172941708}
   - component: {fileID: 114689238670014732}
+  - component: {fileID: 114270067938183050}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -333,6 +334,26 @@ MonoBehaviour:
   FlipValue: {x: -1, y: 1, z: 1}
   SendStateChangeEvents: 1
   SendStateUpdateEvents: 1
+--- !u!114 &114270067938183050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963875283978640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fc24513c89140afa90465a45f5d6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberOfRays: 5
+  KnockbackForce: {x: 0, y: 15}
+  DamageCausedKnockbackType: 1
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  DamagePerStomp: 1
+  ResetNumberOfJumpsOnStomp: 1
+  InvincibilityDuration: 0.5
 --- !u!114 &114376649422577372
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,7 +7,6 @@ TagManager:
   - LevelBounds
   - Music
   - Background
-  - Traps
   layers:
   - Default
   - TransparentFX
