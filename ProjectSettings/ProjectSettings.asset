@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 14
-  productGUID: 2e896da6522684f4a8ce5b242d3640f3
+  productGUID: 00000000000000000000000000000000
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 3
@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 4.2
+  bundleVersion: 4.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -149,7 +149,7 @@ PlayerSettings:
       depthBufferSharingEnabled: 0
     oculus:
       sharedDepthBuffer: 0
-      dashSupport: 1
+      dashSupport: 0
   protectGraphicsMemory: 0
   useHDRDisplay: 0
   m_ColorGamuts: 00000000
@@ -165,7 +165,7 @@ PlayerSettings:
     tvOS: com.reuno.corgienginetechdemo
   buildNumber:
     iOS: 0
-  AndroidBundleVersionCode: 201710041
+  AndroidBundleVersionCode: 2018012001
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

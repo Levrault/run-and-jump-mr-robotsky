@@ -84,7 +84,6 @@ GameObject:
   - component: {fileID: 114951680109036800}
   - component: {fileID: 114082438216698370}
   - component: {fileID: 114866510362936126}
-  - component: {fileID: 114584303459268612}
   - component: {fileID: 114161823228127108}
   - component: {fileID: 114531780172941708}
   - component: {fileID: 114689238670014732}
@@ -231,7 +230,7 @@ MonoBehaviour:
   TargetLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  DamageCaused: 10
+  DamageCaused: 1
   DamageCausedKnockbackType: 1
   DamageCausedKnockbackForce: {x: 10, y: 2}
   InvincibilityDuration: 0.5
@@ -307,8 +306,8 @@ MonoBehaviour:
   AbilityInProgressSfx: {fileID: 0}
   AbilityStopSfx: {fileID: 0}
   AbilityPermitted: 1
-  WallClingingSlowFactor: 0.6
-  WallClingingTolerance: 0.3
+  WallClingingSlowFactor: 0.4
+  WallClingingTolerance: 0.5
   TimeBeforeExitWallClinging: 0.5
   IsCollidingRight: 0
 --- !u!114 &114200703980285170
@@ -396,6 +395,7 @@ MonoBehaviour:
   NumberOfHorizontalRays: 8
   NumberOfVerticalRays: 8
   RayOffset: 0.05
+  CrouchedRaycastLengthMultiplier: 1
   StickWhenWalkingDownSlopes: 0
   StickyRaycastLength: 0
   AutomaticGravitySettings: 1
@@ -462,27 +462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93caae07b7dcf4d2faa6a6786d760446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityStartSfx: {fileID: 0}
+  AbilityStartSfx: {fileID: 8300000, guid: f9d6abf67718443b8b6fa9e6e1e8f6bf, type: 3}
   AbilityInProgressSfx: {fileID: 0}
   AbilityStopSfx: {fileID: 0}
   AbilityPermitted: 1
   WallJumpForce: {x: 10, y: 4}
---- !u!114 &114584303459268612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1963875283978640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd71e945bfcd4897b3a95607989c7d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityStartSfx: {fileID: 0}
-  AbilityInProgressSfx: {fileID: 0}
-  AbilityStopSfx: {fileID: 0}
-  AbilityPermitted: 1
-  RunSpeed: 16
 --- !u!114 &114689238670014732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -535,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c1a8bab4d234998bcbc559bb58fa11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityStartSfx: {fileID: 8300000, guid: 76f8e96c896b3bf4a9aedb06c729d822, type: 3}
+  AbilityStartSfx: {fileID: 8300000, guid: f9d6abf67718443b8b6fa9e6e1e8f6bf, type: 3}
   AbilityInProgressSfx: {fileID: 0}
   AbilityStopSfx: {fileID: 0}
   AbilityPermitted: 1
@@ -562,7 +546,7 @@ MonoBehaviour:
   AbilityInProgressSfx: {fileID: 0}
   AbilityStopSfx: {fileID: 0}
   AbilityPermitted: 1
-  WalkSpeed: 6
+  WalkSpeed: 12
   TouchTheGroundEffect: {fileID: 0}
   TouchTheGroundSfx: {fileID: 0}
 --- !u!212 &212741075187702586
